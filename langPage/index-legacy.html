@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Landpage Interna - Trilhando Rios</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link rel="icon" href="Bandeira_do_Tocantins.svg.png" type="image/png">
+<style>
+    /* Reset básico */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Roboto', sans-serif;
+        background: #f4f4f9;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    header {
+        background: #1345B5;
+        color: #FFD901;
+        padding: 2rem 1rem;
+        text-align: center;
+    }
+
+    header h1 {
+        margin-bottom: 0.5rem;
+        font-size: 2rem;
+    }
+
+    header p {
+        font-size: 1rem;
+    }
+
+    section {
+        max-width: 1000px;
+        margin: 2rem auto;
+        padding: 1.5rem;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+        color: #1345B5;
+        text-align: center;
+        margin-bottom: 1.5rem;
+        font-size: 1.6rem;
+    }
+
+    ul {
+        margin-left: 1rem;
+        list-style: disc;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+    }
+
+    th, td {
+        padding: 0.6rem;
+        border: 1px solid #ccc;
+        text-align: left;
+        font-size: 0.95rem;
+    }
+
+    th {
+        background: #FFD901;
+        color: #1345B5;
+    }
+
+    /* Roadmap cards */
+    .cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .card {
+        background: #FFD901;
+        border-radius: 12px;
+        padding: 1.5rem;
+        width: 300px;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        position: relative;
+        transition: transform 0.3s, box-shadow 0.3s;
+        color: #1345B5;
+        font-weight: 500;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+
+    .card h3 {
+        margin-bottom: 0.8rem;
+        font-size: 1.2rem;
+    }
+
+    .phase-icon {
+        position: absolute;
+        top: -20px;
+        right: -20px;
+        width: 50px;
+        height: 50px;
+        background: #1345B5;
+        color: #FFD901;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        font-size: 1.2rem;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+
+    .kpis ul {
+        list-style: disc inside;
+    }
+
+    footer {
+        text-align: center;
+        padding: 1rem;
+        background: #1345B5;
+        color: #FFD901;
+        font-size: 0.9rem;
+        margin-top: 2rem;
+    }
+
+        #passwordContainer {
+        margin-top: 1rem;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    #passwordContainer.hidden {
+        opacity: 0;
+        transform: translateY(-50px);
+        pointer-events: none;
+    }
+
+    #passwordInput {
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+        border: 2px solid #1345B5;
+        border-radius: 5px;
+        text-align: center;
+        width: 250px;
+    }
+
+    #submitBtn {
+        padding: 0.8rem 1.5rem;
+        background: #FFD901;
+        color: #1345B5;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        margin-left: 0.5rem;
+        transition: background 0.3s ease;
+    }
+
+    #submitBtn:hover {
+        background: #e0c800;
+    }
+
+    /* Conteúdo inicial invisível */
+    #mainContent {
+        max-width: 1000px;
+        margin: 2rem auto;
+        padding: 1.5rem;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+        pointer-events: none;
+    }
+
+    #mainContent.visible {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+
+    /* Responsividade */
+    @media (max-width: 900px) {
+        .card {
+            width: 45%;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .card {
+            width: 90%;
+        }
+        header h1 {
+            font-size: 1.6rem;
+        }
+        header p {
+            font-size: 0.9rem;
+        }
+        h2 {
+            font-size: 1.3rem;
+        }
+        th, td {
+            font-size: 0.85rem;
+        }
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Trilhando Rios</h1>
+    <p>Plataforma de mapeamento geográfico, histórico e turístico do Tocantins</p>
+</header>
+
+<section>
+    <h2>Objetivo Geral</h2>
+    <p>Criar uma plataforma multimodal que integre dados geográficos oficiais, pontos turísticos e culturais do Tocantins, conteúdos jornalísticos e narrativos com pitadas artísticas, com operações automatizadas para ingestão, processamento e publicação de dados.</p>
+</section>
+
+<section>
+    <h2>Objetivos Específicos</h2>
+    <ul>
+        <li>Construir pipeline automatizado de ingestão de dados via APIs e scrapers.</li>
+        <li>Centralizar dados em PostgreSQL + PostGIS, imagens em MinIO/S3 e textos em Elastic/Milvus.</li>
+        <li>Criar modelos multimodais para análise de imagens, OCR e geração de textos.</li>
+        <li>Desenvolver frontend interativo para visualização de mapas e artigos.</li>
+        <li>Implementar orquestração e automação completa dos processos.</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Tecnologias Principais</h2>
+    <table>
+        <tr>
+            <th>Camada</th>
+            <th>Ferramenta / Biblioteca</th>
+            <th>Função</th>
+        </tr>
+        <tr>
+            <td>Backend</td>
+            <td>Python + Flask</td>
+            <td>API REST/GraphQL para MVP</td>
+        </tr>
+        <tr>
+            <td>Banco de dados</td>
+            <td>PostgreSQL + PostGIS</td>
+            <td>Geodados e consultas espaciais</td>
+        </tr>
+        <tr>
+            <td>Index/Busca</td>
+            <td>Milvus / Elastic</td>
+            <td>Busca semântica e RAG</td>
+        </tr>
+        <tr>
+            <td>Frontend</td>
+            <td>React + Leaflet/Mapbox</td>
+            <td>Mapas interativos e dashboards</td>
+        </tr>
+        <tr>
+            <td>IA / LLM</td>
+            <td>OpenAI / Claude / Gemini (multimodal)</td>
+            <td>Geração de texto + interpretação de imagens</td>
+        </tr>
+        <tr>
+            <td>ETL / Scraping</td>
+            <td>Python (requests, BS4, Playwright, Geopandas)</td>
+            <td>Ingestão e normalização</td>
+        </tr>
+        <tr>
+            <td>Armazenamento multimídia</td>
+            <td>MinIO / S3</td>
+            <td>Fotos e vídeos com metadados</td>
+        </tr>
+        <tr>
+            <td>Orquestração</td>
+            <td>Airflow / Prefect</td>
+            <td>Jobs agendados e monitoramento</td>
+        </tr>
+    </table>
+</section>
+
+<section>
+    <h2>Roadmap de Execução</h2>
+    <div class="cards">
+        <div class="card">
+            <div class="phase-icon">0</div>
+            <h3>Fase 0 – Preparação</h3>
+            <ul>
+                <li>Definir escopo detalhado do projeto.</li>
+                <li>Criar repositórios Git e estruturas iniciais de pastas.</li>
+                <li>Configurar ambiente de desenvolvimento e teste (Docker).</li>
+            </ul>
+        </div>
+        <div class="card">
+            <div class="phase-icon">1</div>
+            <h3>Fase 1 – Ingestão e Armazenamento</h3>
+            <ul>
+                <li>Implementar scripts de ingestão de dados geográficos (IBGE, OSM).</li>
+                <li>Criar scrapers controlados para sites de turismo e cultura.</li>
+                <li>Estruturar banco PostGIS e buckets de mídia.</li>
+            </ul>
+        </div>
+        <div class="card">
+            <div class="phase-icon">2</div>
+            <h3>Fase 2 – Indexação e Pesquisa</h3>
+            <ul>
+                <li>Calcular embeddings de textos e imagens.</li>
+                <li>Indexar em Milvus/Elastic.</li>
+                <li>Criar endpoints básicos de busca e filtros internos.</li>
+            </ul>
+        </div>
+        <div class="card">
+            <div class="phase-icon">3</div>
+            <h3>Fase 3 – Geração de Conteúdo</h3>
+            <ul>
+                <li>Desenvolver pipeline RAG para textos com rigor jornalístico + interpretação artística.</li>
+                <li>Integrar análise multimodal (imagens → descrições/alt-text).</li>
+                <li>Testar prompts e fluxos de geração automática de artigos.</li>
+            </ul>
+        </div>
+        <div class="card">
+            <div class="phase-icon">4</div>
+            <h3>Fase 4 – Frontend e Visualização</h3>
+            <ul>
+                <li>Criar dashboards internos para revisão de conteúdos.</li>
+                <li>Mapas interativos com camadas de POIs, fotos e textos.</li>
+                <li>Ferramenta de curadoria rápida (aprovar/rejeitar conteúdo gerado).</li>
+            </ul>
+        </div>
+        <div class="card">
+            <div class="phase-icon">5</div>
+            <h3>Fase 5 – Automação Completa</h3>
+            <ul>
+                <li>Configurar jobs de ingestão periódica (diário, semanal, mensal).</li>
+                <li>Automação da reindexação e atualização de artigos.</li>
+                <li>Monitoramento de performance, erros e quotas de APIs.</li>
+            </ul>
+        </div>
+        <div class="card">
+            <div class="phase-icon">6</div>
+            <h3>Fase 6 – Testes e Ajustes Finais</h3>
+            <ul>
+                <li>Revisão interna de consistência factual e geográfica.</li>
+                <li>Ajustes de prompts e estilos de texto.</li>
+                <li>Testes de integração do backend + frontend + IA.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="kpis">
+    <h2>KPIs Internos / Métricas</h2>
+    <ul>
+        <li>% de cobertura geográfica do Tocantins (municípios e POIs).</li>
+        <li>% de fatos referenciados corretamente em artigos.</li>
+        <li>Tempo médio de geração de conteúdo por local.</li>
+        <li>Número de imagens aprovadas/licenciadas corretamente.</li>
+        <li>Disponibilidade da plataforma interna (>99% uptime).</li>
+    </ul>
+</section>
+
+<footer>
+    <p>Landpage interna – Trilhando Rios | Desenvolvimento</p>
+</footer>
+
+</body>
+</html>
